@@ -15,7 +15,7 @@ export default function NavBar() {
   const darkMode = useAppSelector((state) => state.global.darkMode);
 
   return (
-    <div className="flex items-center justify-between bg-neutral-200 px-4 py-3 dark:bg-black">
+    <div className="fixed top-0 z-10 flex w-full items-center justify-between bg-neutral-200 px-4 py-3 shadow-sm dark:bg-black">
       <div className="flex items-center gap-8">
         {!sidebarCollapse ? null : (
           <button

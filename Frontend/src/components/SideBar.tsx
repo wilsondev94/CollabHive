@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import {
   AlertCircle,
@@ -47,14 +47,45 @@ export default function SideBar() {
     (state) => state.global.sidebarCollapse,
   );
 
-  const sideBarClassName = `fixed flex flex-col h-[100px] justify-between shadow-lg transition-all duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white w-64 ${sidebarCollapse ? "w-0 hidden" : "w-64"}`;
+  const sidebarRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (
+        sidebarRef.current &&
+        !sidebarRef.current.contains(e.target as Node) &&
+        !sidebarCollapse
+      ) {
+        dispatch(setSidebarCollapse(true));
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dispatch, sidebarCollapse]);
+
+  const sideBarClassName = `fixed flex flex-col h-[100px] justify-between shadow-lg transition-all duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white w-64
+  transform transition-transform duration-500
+  ${sidebarCollapse ? "-translate-x-[16rem]" : "translate-x-0"}
+  
+  
+  `;
 
   return (
-    <div className={sideBarClassName}>
+    <div ref={sidebarRef} className={sideBarClassName}>
       <div className="flex h-[100%] w-full flex-col justify-start">
-        <div className="z-50 flex max-h-[56px] w-64 items-center justify-between bg-white px-6 pt-3 dark:bg-black">
-          <div className="text-xl font-bold text-gray-800 dark:text-white">
-            WILIST
+        <div className="fixed z-50 flex max-h-[56px] w-64 items-center justify-between bg-white px-6 pt-3 dark:bg-black">
+          <div className="mt-4 text-xl font-bold text-gray-800 dark:text-white">
+            <Image
+              src="/teaming-logo-01.png"
+              alt="logo"
+              width={100}
+              height={100}
+              className="-ml-2"
+            />
           </div>
           {sidebarCollapse ? null : (
             <button
@@ -65,8 +96,7 @@ export default function SideBar() {
             </button>
           )}
         </div>
-        <div className="flex items-center gap-5 border-y-[1.5px] px-8 py-4 dark:border-gray-700">
-          <Image src="/logo.png" alt="logo" width={40} height={40} />
+        <div className="mt-[64px] flex items-center gap-5 border-y-[1.5px] px-8 py-4 dark:border-gray-700">
           <div>
             <h3 className="text-md font-bold tracking-wide dark:text-gray-200">
               WILSON TEAM

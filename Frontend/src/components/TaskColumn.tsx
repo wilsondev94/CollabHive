@@ -18,8 +18,6 @@ export default function TaskColumn({
   moveTask,
   setOpenNewTaskModal,
 }: TaskColumnProps) {
-  console.log(tasks);
-
   const [{ isOver }, drop] = useDrop(() => ({
     accept: "task",
     drop: (item: { id: number }) => moveTask(item.id, status),

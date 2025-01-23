@@ -25,10 +25,10 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
     <div className="relative flex min-h-screen w-full bg-gray-900">
       <SideBar />
       <main
-        className={`flex w-full flex-col bg-gray-50 dark:bg-dark-bg ${sidebarCollapse ? "" : "md:pl-64"}`}
+        className={`flex w-full flex-col bg-gray-50 dark:bg-dark-bg ${sidebarCollapse ? "" : "md:pl-64"} ${!sidebarCollapse && "bg-black opacity-15 blur-[1.5px]"} `}
       >
         <NavBar />
-        {children}
+        <div className="mt-[64px]">{children}</div>
       </main>
     </div>
   );
