@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Teaming",
+  title: "CollabHive",
 };
 
 export default function RootLayout({

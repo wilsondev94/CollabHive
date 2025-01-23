@@ -1,6 +1,6 @@
-# TEAMING
+# CollabHive
 
-Teaming is a project management app where teams can create and manage projects and tasks for a particular team.
+CollabHive is a project management app where teams can create and manage projects and tasks for a particular team.
 
 ## Built with
 
